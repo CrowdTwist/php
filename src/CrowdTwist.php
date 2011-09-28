@@ -48,8 +48,8 @@
  * DOCUMENTATION
  * =============
  *
- *  http://crowdtwist.com/developers
- *  http://crowdtwist.com/docs/api
+ *  http://www.crowdtwist.com/developers
+ *  http://www.crowdtwist.com/docs/api
  *
  * CONTACT US
  * ==========
@@ -422,6 +422,48 @@ extends _crwd_Api
                 'POST',
                 $this->get_purchase_delete_end_point_name(),
                 array('receipt_id' => $receipt_id));
+    }
+
+    final public function purchase_create_batch($delimiter, $gzip, $file_path)
+    {
+        if (!is_file($file_path))
+        {
+            throw new crwd_Exception("could not find file at \"$file_path\"");
+        }
+
+        parse_str(
+            $this->get_signed_query_string(
+                'purchase-create-batch',
+                array(
+                    'delimiter' => $delimiter,
+                    'file_hash' => sha1(file_get_contents($file_path)),
+                    'gzip'      => intval($gzip),
+                )),
+            $params);
+
+        $params[ 'file' ] = "@$file_path";
+
+        $curl_handle = curl_init();
+        curl_setopt($curl_handle,
+                    CURLOPT_URL,
+                    $this->get_end_point_base('json'));
+        curl_setopt($curl_handle,
+                    CURLOPT_RETURNTRANSFER,
+                    true);
+        curl_setopt($curl_handle,
+                    CURLOPT_CONNECTTIMEOUT,
+                    30);
+        curl_setopt($curl_handle,
+                    CURLOPT_TIMEOUT,
+                    30);
+        curl_setopt($curl_handle,
+                    CURLOPT_POST,
+                    true);
+        curl_setopt($curl_handle,
+                    CURLOPT_POSTFIELDS,
+                    $params);
+
+        return json_decode(curl_exec($curl_handle), true);
     }
 
     //
@@ -936,6 +978,15 @@ class _crwd_Api
         return 'auth-sign-out';
     }
 
+    final protected function get_end_point_base($return_format)
+    {
+        $this->validate_return_format($return_format);
+
+        return $this->request_scheme
+               . '://' . $this->get_api_domain()
+               . self::API_PATH . "/$return_format";
+    }
+
     final protected function get_lang_set_end_point_name()
     {
         return 'lang-set';
@@ -1040,15 +1091,6 @@ class _crwd_Api
         {
             return self::API_DOMAIN;
         }
-    }
-
-    private function get_end_point_base($return_format)
-    {
-        $this->validate_return_format($return_format);
-
-        return $this->request_scheme
-               . '://' . $this->get_api_domain()
-               . self::API_PATH . "/$return_format";
     }
 
     private function get_signature($query_table)

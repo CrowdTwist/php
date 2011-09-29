@@ -155,19 +155,6 @@ extends _crwd_Api
                     $purchase->get_query_table());
     }
 
-    final public function get_purchase_delete_url($receipt_id)
-    {
-        return $this->get_url(
-                $this->get_purchase_delete_end_point_name(),
-                array('receipt_id' => $receipt_id));
-    }
-
-    final public function purchase_delete($receipt_id)
-    {
-        $this->draw($this->get_purchase_delete_end_point_name(),
-                    array('receipt_id' => $receipt_id));
-    }
-
     //
     // User
     //
@@ -407,21 +394,6 @@ extends _crwd_Api
                 'POST',
                 $this->get_purchase_create_end_point_name(),
                 $purchase->get_query_table());
-    }
-
-    final public function get_purchase_delete_url($receipt_id)
-    {
-        return $this->get_url(
-                $this->get_purchase_delete_end_point_name(),
-                array('receipt_id' => $receipt_id));
-    }
-
-    final public function purchase_delete($receipt_id)
-    {
-        return $this->exec(
-                'POST',
-                $this->get_purchase_delete_end_point_name(),
-                array('receipt_id' => $receipt_id));
     }
 
     final public function purchase_create_batch($delimiter, $gzip, $file_path)
@@ -1010,11 +982,6 @@ class _crwd_Api
     final protected function get_purchase_create_end_point_name()
     {
         return 'purchase-create';
-    }
-
-    final protected function get_purchase_delete_end_point_name()
-    {
-        return 'purchase-delete';
     }
 
     final protected function get_user_activity_end_point_name()

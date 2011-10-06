@@ -26,9 +26,44 @@ software:
 
 Sample CLI
 ----------
-cd /opt/crowdtwist/php/bin
+cd /opt/crowdtwist/php/bin/v1
 php ./purchase-create-batch.php ...
 
 Sample crontab
 --------------
-* * * * * (cd /opt/crowdtwist/php/bin; php ./purchase-create-batch.php ...)
+* * * * * (cd /opt/crowdtwist/php/bin/v1; php ./purchase-create-batch.php ...)
+
+// +------------------------------------------------------------+
+// | purchase-return-batch.php                                  |
+// +------------------------------------------------------------+
+
+Description
+-----------
+Uploads a file containing return data for batch processing.
+
+API URL
+-------
+http://www.crowdtwist.com/docs/api/end-point/purchase-return-batch
+
+git URL
+-------
+git://github.com/CrowdTwist/php.git
+
+Notes
+-----
+The sample code below assumes you executed the following to retrieve this
+software:
+
+    cd /opt
+    mkdir crowdtwist
+    cd crowdtwist
+    git clone git://github.com/CrowdTwist/php.git
+
+Sample CLI
+----------
+cd /opt/crowdtwist/php/bin/v1
+php ./purchase-return-batch.php ...
+
+Sample crontab
+--------------
+* * * * * (cd /opt/crowdtwist/php/bin/v1; php ./purchase-return-batch.php ...)

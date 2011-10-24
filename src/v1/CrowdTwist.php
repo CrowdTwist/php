@@ -669,6 +669,7 @@ extends _crwd_Transmittable_Entity
             'mobile_phone_number'        => true,
             'password'                   => true,
             'receive_email_updates'      => true,
+            'send_verify_email'          => true,
             'third_party_id'             => true,
             'twitter_oauth_token'        => true,
             'twitter_oauth_token_secret' => true,

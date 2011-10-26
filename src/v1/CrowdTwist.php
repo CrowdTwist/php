@@ -481,6 +481,63 @@ extends _crwd_Api
     }
 
     //
+    // Share
+    //
+
+    final public function get_share_facebook_url($user_id, $title, $url, $fb_id)
+    {
+        return $this->get_url(
+                $this->get_share_facebook_end_point_name(),
+                array(
+                    'user_id' => $user_id,
+                    'title'   => $title,
+                    'url'     => $url,
+                    'fb_id'   => $fb_id,
+                ));
+    }
+
+    final public function share_facebook($user_id, $title, $url, $fb_id)
+    {
+        $this->exec(
+            'GET',
+            $this->get_share_facebook_end_point_name(),
+            array(
+                'user_id' => $user_id,
+                'title'   => $title,
+                'url'     => $url,
+                'fb_id'   => $fb_id,
+            ));
+    }
+
+    final public function get_share_twitter_url($user_id,
+                                                $title,
+                                                $url,
+                                                $twit_id)
+    {
+        return $this->get_url(
+                $this->get_share_twitter_end_point_name(),
+                array(
+                    'user_id' => $user_id,
+                    'title'   => $title,
+                    'url'     => $url,
+                    'twit_id' => $twit_id,
+                ));
+    }
+
+    final public function share_twitter($user_id, $title, $url, $twit_id)
+    {
+        $this->exec(
+            'GET',
+            $this->get_share_twitter_end_point_name(),
+            array(
+                'user_id' => $user_id,
+                'title'   => $title,
+                'url'     => $url,
+                'twit_id' => $twit_id,
+            ));
+    }
+
+    //
     // User
     //
 
@@ -1025,6 +1082,16 @@ class _crwd_Api
     final protected function get_purchase_create_end_point_name()
     {
         return 'purchase-create';
+    }
+
+    final protected function get_share_facebook_end_point_name()
+    {
+        return 'share-facebook';
+    }
+
+    final protected function get_share_twitter_end_point_name()
+    {
+        return 'share-twitter';
     }
 
     final protected function get_user_activity_end_point_name()

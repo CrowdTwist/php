@@ -481,6 +481,31 @@ extends _crwd_Api
     }
 
     //
+    // Redemption
+    //
+
+    final public function get_redemption_create_url($user_id, $num_points)
+    {
+        return $this->get_url(
+                $this->get_redemption_create_end_point_name(),
+                array(
+                    'num_points' => $num_points,
+                    'user_id'    => $user_id,
+                ));
+    }
+
+    final public function redemption_create($user_id, $num_points)
+    {
+        return $this->exec(
+                'POST',
+                $this->get_redemption_create_end_point_name(),
+                array(
+                    'num_points' => $num_points,
+                    'user_id'    => $user_id,
+                ));
+    }
+
+    //
     // Share
     //
 
@@ -1082,6 +1107,11 @@ class _crwd_Api
     final protected function get_purchase_create_end_point_name()
     {
         return 'purchase-create';
+    }
+
+    final protected function get_redemption_create_end_point_name()
+    {
+        return 'redemption-create';
     }
 
     final protected function get_share_facebook_end_point_name()

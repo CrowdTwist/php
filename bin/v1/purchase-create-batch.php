@@ -65,9 +65,9 @@ if (empty($response))
     // purchase_create_batch() are too low for the size of file being uploaded.
     // Consider increasing those temporarily to determine if that is the cause
     // of the exception.
-    throw new crwd_Exception('a timeout or fatal server-side error has '
-                             . 'occurred that may not have been logged; please '
-                             . 'contact noc@crowdtwist.com');
+    throw new Exception('a timeout or fatal server-side error has occurred '
+                        . 'that may not have been logged; please contact '
+                        . 'noc@crowdtwist.com');
 }
 
 if (is_string($response))

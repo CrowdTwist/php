@@ -424,10 +424,10 @@ extends _crwd_Api
                     true);
         curl_setopt($curl_handle,
                     CURLOPT_CONNECTTIMEOUT,
-                    30);
+                    3600);
         curl_setopt($curl_handle,
                     CURLOPT_TIMEOUT,
-                    30);
+                    3600);
         curl_setopt($curl_handle,
                     CURLOPT_POST,
                     true);
@@ -466,10 +466,10 @@ extends _crwd_Api
                     true);
         curl_setopt($curl_handle,
                     CURLOPT_CONNECTTIMEOUT,
-                    30);
+                    3600);
         curl_setopt($curl_handle,
                     CURLOPT_TIMEOUT,
-                    30);
+                    3600);
         curl_setopt($curl_handle,
                     CURLOPT_POST,
                     true);

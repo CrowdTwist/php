@@ -435,7 +435,15 @@ extends _crwd_Api
                     CURLOPT_POSTFIELDS,
                     $params);
 
-        return json_decode(curl_exec($curl_handle), true);
+        $response = curl_exec($curl_handle);
+        $error    = curl_error($curl_handle);
+        if (!empty($error))
+        {
+            throw new crwd_Exception("cURL failed with error message "
+                                     . "\"$error\"");
+        }
+
+        return json_decode($response, true);
     }
 
     final public function purchase_return_batch($delimiter, $gzip, $file_path)
@@ -477,7 +485,15 @@ extends _crwd_Api
                     CURLOPT_POSTFIELDS,
                     $params);
 
-        return json_decode(curl_exec($curl_handle), true);
+        $response = curl_exec($curl_handle);
+        $error    = curl_error($curl_handle);
+        if (!empty($error))
+        {
+            throw new crwd_Exception("cURL failed with error message "
+                                     . "\"$error\"");
+        }
+
+        return json_decode($response, true);
     }
 
     //

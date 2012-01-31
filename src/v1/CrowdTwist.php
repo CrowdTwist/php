@@ -780,19 +780,25 @@ class crwd_Purchase
 {
     private $receipt_id;
     private $date_purchase;
+    private $total;
+    private $shipping;
+    private $tax;
     private $location;
     private $index;
     private $items;
 
-    static function make($receipt_id, $date_purchase)
+    static function make($receipt_id, $date_purchase, $total, $shipping, $tax)
     {
-        return new self($receipt_id, $date_purchase);
+        return new self($receipt_id, $date_purchase, $total, $shipping, $tax);
     }
 
-    function __construct($receipt_id, $date_purchase)
+    function __construct($receipt_id, $date_purchase, $total, $shipping, $tax)
     {
         $this->receipt_id    = $receipt_id;
         $this->date_purchase = $date_purchase;
+        $this->total         = $total;
+        $this->shipping      = $shipping;
+        $this->tax           = $tax;
         $this->location      = array('loc_id'          => null,
                                      'loc_description' => null,
                                      'loc_address_1'   => null,
@@ -858,7 +864,10 @@ class crwd_Purchase
         $this->validate();
 
         return array_merge(array('receipt_id'    => $this->receipt_id,
-                                 'date_purchase' => $this->date_purchase),
+                                 'date_purchase' => $this->date_purchase,
+                                 'total'         => $this->total,
+                                 'shipping'      => $this->shipping,
+                                 'tax'           => $this->tax),
                            $this->location,
                            $this->items);
     }

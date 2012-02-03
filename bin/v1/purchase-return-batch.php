@@ -59,25 +59,12 @@ list($command, $api_key, $api_secret, $delimiter, $gzip, $file_path) = $argv;
 
 $response = crwd_Rpc_Api::make($api_key, $api_secret)
                 ->purchase_return_batch($delimiter, intval($gzip), $file_path);
-if (empty($response))
-{
-    // An empty response can indicate the cURL timeout values in the method
-    // purchase_return_batch() are too low for the size of file being uploaded.
-    // Consider increasing those temporarily to determine if that is the cause
-    // of the exception.
-    throw new Exception('a timeout or fatal server-side error has occurred '
-                        . 'that may not have been logged; please contact '
-                        . 'noc@crowdtwist.com');
-}
-
-if (is_string($response))
-{
-    print "$response\n";
-    exit(0);
-}
-else
+if (!empty($response))
 {
     print_r($response);
     exit(1);
 }
+
+print "OK\n";
+exit(0);
 ?>

@@ -435,15 +435,24 @@ extends _crwd_Api
                     CURLOPT_POSTFIELDS,
                     $params);
 
-        $response = curl_exec($curl_handle);
-        $error    = curl_error($curl_handle);
+        $response  = curl_exec($curl_handle);
+        $http_code = curl_getinfo($curl_handle, CURLINFO_HTTP_CODE);
+        $error     = curl_error($curl_handle);
         if (!empty($error))
         {
-            throw new crwd_Exception("cURL failed with error message "
-                                     . "\"$error\"");
+            throw new crwd_Exception(
+                "cURL failed with error message \"$error\"");
         }
 
-        return json_decode($response, true);
+        if ($http_code != 200)
+        {
+            throw new crwd_Exception(
+                'a timeout or fatal server-side error has occurred that may '
+                . 'not have been logged; please contact noc@crowdtwist.com');
+
+        }
+
+        return empty($response) ? null : json_decode($response, true);
     }
 
     final public function purchase_return_batch($delimiter, $gzip, $file_path)
@@ -485,15 +494,24 @@ extends _crwd_Api
                     CURLOPT_POSTFIELDS,
                     $params);
 
-        $response = curl_exec($curl_handle);
-        $error    = curl_error($curl_handle);
+        $response  = curl_exec($curl_handle);
+        $http_code = curl_getinfo($curl_handle, CURLINFO_HTTP_CODE);
+        $error     = curl_error($curl_handle);
         if (!empty($error))
         {
-            throw new crwd_Exception("cURL failed with error message "
-                                     . "\"$error\"");
+            throw new crwd_Exception(
+                "cURL failed with error message \"$error\"");
         }
 
-        return json_decode($response, true);
+        if ($http_code != 200)
+        {
+            throw new crwd_Exception(
+                'a timeout or fatal server-side error has occurred that may '
+                . 'not have been logged; please contact noc@crowdtwist.com');
+
+        }
+
+        return empty($response) ? null : json_decode($response, true);
     }
 
     //

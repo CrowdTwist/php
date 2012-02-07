@@ -1230,8 +1230,6 @@ class _crwd_Api
 
     private function get_api_domain()
     {
-return 'crowdtwist.com';
-
         if (function_exists('co_get_server_environment'))
         {
             return (co_get_server_environment() !=

@@ -413,8 +413,7 @@ extends _crwd_Api
                 )),
             $params);
 
-        $params[ 'file' ] = "@$file_path"
-                            . ($gzip ? ';type=application/x-gzip' : '');
+        $params[ 'file' ] = "@$file_path";
 
         $curl_handle = curl_init();
         curl_setopt($curl_handle,
@@ -472,8 +471,7 @@ extends _crwd_Api
                 )),
             $params);
 
-        $params[ 'file' ] = "@$file_path"
-                            . ($gzip ? ';type=application/x-gzip' : '');
+        $params[ 'file' ] = "@$file_path";
 
         $curl_handle = curl_init();
         curl_setopt($curl_handle,

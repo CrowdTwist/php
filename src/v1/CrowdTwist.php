@@ -413,7 +413,8 @@ extends _crwd_Api
                 )),
             $params);
 
-        $params[ 'file' ] = "@$file_path";
+        $params[ 'file' ] = "@$file_path"
+                            . ($gzip ? ';application/x-gzip' : '');
 
         $curl_handle = curl_init();
         curl_setopt($curl_handle,
@@ -449,7 +450,6 @@ extends _crwd_Api
             throw new crwd_Exception(
                 'a timeout or fatal server-side error has occurred that may '
                 . 'not have been logged; please contact noc@crowdtwist.com');
-
         }
 
         return empty($response) ? null : json_decode($response, true);
@@ -472,7 +472,8 @@ extends _crwd_Api
                 )),
             $params);
 
-        $params[ 'file' ] = "@$file_path";
+        $params[ 'file' ] = "@$file_path"
+                            . ($gzip ? ';application/x-gzip' : '');
 
         $curl_handle = curl_init();
         curl_setopt($curl_handle,
@@ -508,7 +509,6 @@ extends _crwd_Api
             throw new crwd_Exception(
                 'a timeout or fatal server-side error has occurred that may '
                 . 'not have been logged; please contact noc@crowdtwist.com');
-
         }
 
         return empty($response) ? null : json_decode($response, true);
@@ -1230,6 +1230,8 @@ class _crwd_Api
 
     private function get_api_domain()
     {
+return 'crowdtwist.com';
+
         if (function_exists('co_get_server_environment'))
         {
             return (co_get_server_environment() !=

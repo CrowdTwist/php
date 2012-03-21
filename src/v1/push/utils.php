@@ -45,20 +45,26 @@ require_once '../CrowdTwist.php';
 
 function crwd_push_signature_is_valid($api_key, $api_secret, $query_string)
 {
-    if (strlen($api_key) == 0) {
+    if (strlen($api_key) == 0)
+    {
         throw new crwd_Exception('the API key was empty');
-    } else if (strlen($api_secret) == 0) {
+    }
+    else if (strlen($api_secret) == 0)
+    {
         throw new crwd_Exception('the API secret was empty');
     }
 
     parse_str($query_string, $params);
 
     // Query string parameters must be provided, and api_sig must be present.
-    if (empty($params)) {
+    if (empty($params))
+    {
         throw new crwd_Exception('no query string parameters were provided');
-    } else if (!array_key_exists('api_sig', $params)) {
-        throw new crwd_Exception(
-            'api_sig value was not provided in query string');
+    }
+    else if (!array_key_exists('api_sig', $params))
+    {
+        throw new crwd_Exception('api_sig value was not provided in query '
+                                 . 'string');
     }
 
     $api_sig = $params[ 'api_sig' ];

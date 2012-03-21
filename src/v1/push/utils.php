@@ -34,18 +34,39 @@
  */
 
 // +------------------------------------------------------------+
+// | INCLUDES                                                   |
+// +------------------------------------------------------------+
+
+require_once '../CrowdTwist.php';
+
+// +------------------------------------------------------------+
 // | PUBLIC FUNCTIONS                                           |
 // +------------------------------------------------------------+
 
-function crwd_push_signature_is_valid($key, $secret, $query_string)
+function crwd_push_signature_is_valid($api_key, $api_secret, $query_string)
 {
+    if (strlen($api_key) == 0) {
+        throw new crwd_Exception('the API key was empty');
+    } else if (strlen($api_secret) == 0) {
+        throw new crwd_Exception('the API secret was empty');
+    }
+
     parse_str($query_string, $params);
+
+    // Query string parameters must be provided, and api_sig must be present.
+    if (empty($params)) {
+        throw new crwd_Exception('no query string parameters were provided');
+    } else if (!array_key_exists('api_sig', $params)) {
+        throw new crwd_Exception(
+            'api_sig value was not provided in query string');
+    }
+
     $api_sig = $params[ 'api_sig' ];
 
     unset($params[ 'api_key' ]);
     unset($params[ 'api_sig' ]);
 
-    $params[ 'api_key' ] = $key;
+    $params[ 'api_key' ] = $api_key;
     ksort($params);
 
     $sig = '';
@@ -53,7 +74,7 @@ function crwd_push_signature_is_valid($key, $secret, $query_string)
     {
         $sig .= $key . '=' . $value;
     }
-    $sig .= $secret;
+    $sig .= $api_secret;
 
     return (bool)$api_sig == md5($sig);
 }

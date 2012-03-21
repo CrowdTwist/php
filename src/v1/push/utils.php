@@ -76,6 +76,6 @@ function crwd_push_signature_is_valid($api_key, $api_secret, $query_string)
     }
     $sig .= $api_secret;
 
-    return (bool)$api_sig == md5($sig);
+    return $api_sig == md5($sig);
 }
 ?>

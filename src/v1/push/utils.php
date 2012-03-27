@@ -43,7 +43,7 @@ require_once '../CrowdTwist.php';
 // | PUBLIC FUNCTIONS                                           |
 // +------------------------------------------------------------+
 
-function crwd_push_signature_is_valid($api_key, $api_secret, $query_string)
+function crwd_push_signature_is_valid($api_key, $api_secret, $params)
 {
     if (strlen($api_key) == 0)
     {
@@ -53,8 +53,6 @@ function crwd_push_signature_is_valid($api_key, $api_secret, $query_string)
     {
         throw new crwd_Exception('the API secret was empty');
     }
-
-    parse_str($query_string, $params);
 
     // Query string parameters must be provided, and api_sig must be present.
     if (empty($params))

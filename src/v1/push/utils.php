@@ -76,7 +76,7 @@ function crwd_push_signature_is_valid($api_key, $api_secret, $params)
     $sig = '';
     foreach ($params as $key => $value)
     {
-        $sig .= $key . '=' . $value;
+        $sig .= $key . '=' . urldecode($value);
     }
     $sig .= $api_secret;
 

@@ -449,6 +449,7 @@ extends _crwd_Api
             throw new crwd_Exception(
                 'a timeout or fatal server-side error has occurred that may '
                 . 'not have been logged; please contact noc@crowdtwist.com');
+
         }
 
         return empty($response) ? null : json_decode($response, true);
@@ -507,6 +508,7 @@ extends _crwd_Api
             throw new crwd_Exception(
                 'a timeout or fatal server-side error has occurred that may '
                 . 'not have been logged; please contact noc@crowdtwist.com');
+
         }
 
         return empty($response) ? null : json_decode($response, true);
@@ -784,6 +786,7 @@ extends _crwd_Transmittable_Entity
             'password'                   => true,
             'receive_email_updates'      => true,
             'send_verify_email'          => true,
+            'send_verify_sms'            => true,
             'third_party_id'             => true,
             'twitter_oauth_token'        => true,
             'twitter_oauth_token_secret' => true,

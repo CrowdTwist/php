@@ -48,8 +48,7 @@
  * DOCUMENTATION
  * =============
  *
- *  http://www.crowdtwist.com/developers
- *  http://www.crowdtwist.com/docs/api
+ *  http://developers.crowdtwist.com/
  *
  * CONTACT US
  * ==========

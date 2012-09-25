@@ -1391,9 +1391,9 @@ class _crwd_Js_Renderer
             return;
         }
 ?>
-<script type="text/javascript" src="<?= $this->request_scheme ?>://<?= $this->get_js_domain() . self::JS_PATH ?>?z=<?= gmdate("Y-m-d") ?>">
+<script type="text/javascript" src="<?php echo $this->request_scheme ?>://<?php echo $this->get_js_domain() . self::JS_PATH ?>?z=<?php echo gmdate("Y-m-d") ?>">
 </script>
-<?
+<?php
         $this->js_include_rendered = true;
     }
 
@@ -1405,11 +1405,11 @@ class _crwd_Js_Renderer
     {
         var a = new _crwd_api();
 
-        a.pixel('<?= $query_string ?>');
+        a.pixel('<?php echo $query_string ?>');
     }
     catch (err) {}
 </script>
-<?
+<?php
     }
 
     final public function enable_ssl()

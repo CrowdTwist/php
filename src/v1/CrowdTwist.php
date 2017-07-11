@@ -395,6 +395,15 @@ extends _crwd_Api
                 $purchase->get_query_table());
     }
 
+    private static function loadFile($curlHandle, &$params, $filePath) {
+        if (defined('CURLOPT_SAFE_UPLOAD')) {
+            curl_setopt($curlHandle, CURL_SAFE_UPLOAD, true);
+            $params['file'] = new CURLFile($filePath);
+        } else {
+            $params['file'] = $filePath;
+        }
+    }
+
     final public function purchase_create_batch($delimiter, $gzip, $file_path)
     {
         if (!is_file($file_path))
@@ -412,9 +421,8 @@ extends _crwd_Api
                 )),
             $params);
 
-        $params[ 'file' ] = "@$file_path";
-
         $curl_handle = curl_init();
+        self::loadFile($curl_handle, $params, $file_path);
         curl_setopt($curl_handle,
                     CURLOPT_URL,
                     $this->get_end_point_base('json'));
@@ -471,9 +479,8 @@ extends _crwd_Api
                 )),
             $params);
 
-        $params[ 'file' ] = "@$file_path";
-
         $curl_handle = curl_init();
+        self::loadFile($curl_handle, $params, $file_path);
         curl_setopt($curl_handle,
                     CURLOPT_URL,
                     $this->get_end_point_base('json'));

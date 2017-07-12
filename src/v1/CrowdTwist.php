@@ -397,7 +397,7 @@ extends _crwd_Api
 
     private static function loadFile($curlHandle, &$params, $filePath) {
         if (defined('CURLOPT_SAFE_UPLOAD')) {
-            curl_setopt($curlHandle, CURL_SAFE_UPLOAD, true);
+            curl_setopt($curlHandle, CURLOPT_SAFE_UPLOAD, true);
             $params['file'] = new CURLFile($filePath);
         } else {
             $params['file'] = $filePath;
